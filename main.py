@@ -1,5 +1,5 @@
-import os
 import hashlib
+import os
 
 
 def calculateHash(filePath):
@@ -24,3 +24,15 @@ def scanFiles(directory):
             else:
                 fileDict[fileHash] = [filePath]
     return fileDict
+
+
+def deleteDuplicates(fileDict):
+    for key in fileDict:
+        fileList = fileDict[key]
+        while len(fileList) > 1:
+            itemToDelete = fileList.pop()
+            os.remove(itemToDelete)
+
+
+fileDict = scanFiles("diretoryToCheckPlaceholder")
+deleteDuplicates(fileDict)
